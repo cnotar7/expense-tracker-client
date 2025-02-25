@@ -1,8 +1,7 @@
 const ExpenseCategory = [
     "Shopping",
     "Groceries",
-    "Food",
-    "Alcohol",
+    "Food and Drink",
     "Bills",
     "Subscriptions",
     "Pet Care",
@@ -11,7 +10,10 @@ const ExpenseCategory = [
     "Home",
     "Gifts",
     "Personal Care",
-    "Entertainment"
+    "Entertainment",
+    "Transportation",
+    "Income",
+    "Other"
 ];
 
 export { ExpenseCategory };

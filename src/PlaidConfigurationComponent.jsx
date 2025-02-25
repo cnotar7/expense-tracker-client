@@ -7,6 +7,8 @@ const PlaidConfigurationComponent = () => {
 
   const [linkToken, setLinkToken] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [userId, setUserId] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -52,7 +54,7 @@ const PlaidConfigurationComponent = () => {
   const handleGetTransactions = async (event) => {
     event.preventDefault();
     const baseGetRequestURL = 'http://localhost:8080/expenses/transactions';
-    const fullGetRequest = buildGetRequest(baseGetRequestURL, accessToken, null, null, startDate, endDate);
+    const fullGetRequest = buildGetRequest(baseGetRequestURL, accessToken, userId, paymentMethod, startDate, endDate);
     console.log("Using get request: ", fullGetRequest);
     try {
         const response = await axios.get(fullGetRequest);
@@ -80,6 +82,14 @@ const PlaidConfigurationComponent = () => {
       {accessToken &&
         <form onSubmit={handleGetTransactions}>
           <div>
+            <label>User Id: </label>
+            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
+          </div>
+          <div>
+            <label>Payment Method: </label>
+            <input type="text" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} />
+          </div>
+          <div>
             <label>Start Date: </label>
             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
           </div>
@@ -87,7 +97,7 @@ const PlaidConfigurationComponent = () => {
             <label>End Date: </label>
             <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
           </div>
-          <button type="submit">Get</button>
+          <button type="submit">Get Transactions</button>
           {error && <p>ERROR: {error}</p>} {/* Display the variable if it has a value */}
         </form>
       }
